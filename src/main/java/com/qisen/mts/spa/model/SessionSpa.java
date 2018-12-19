@@ -6,16 +6,17 @@ import com.qisen.mts.common.model.SessionAccount;
 
 public class SessionSpa extends SessionAccount {
 
-	@Override
-	public String toString() {
-		return "SessionSpa [id=" + id + ", name=" + name + ", mobile=" + mobile + ", createDate=" + createDate
-				+ ", menuStr=" + menuStr + ", optStr=" + optStr + ", role=" + role + ", status=" + status + "]";
-	}
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -3920174407288686753L;
 
+//	@Override
+//	public String toString() {
+//		return "SessionSpa [id=" + id + ", name=" + name + ", mobile=" + mobile + ", createDate=" + createDate
+//				+ ", menuStr=" + menuStr + ", optStr=" + optStr + ", role=" + role + ", status=" + status + ", eid="
+//				+ eid + ", sid=" + sid + "]";
+//	}
 	private Integer id;
 	private String name;
 	private String mobile;// 手机号码
@@ -24,6 +25,21 @@ public class SessionSpa extends SessionAccount {
 	private String optStr;// 操作权限
 	private String role;// 角色:0超级管理员,1管理员,2操作员
 	private String status;//状态:0正常,1禁用,2删除
+
+	private Integer eid;
+	public Integer getEid() {
+		return eid;
+	}
+	public void setEid(Integer eid) {
+		this.eid = eid;
+	}
+	public Integer getSid() {
+		return sid;
+	}
+	public void setSid(Integer sid) {
+		this.sid = sid;
+	}
+	private Integer sid;
 	public Integer getId() {
 		return id;
 	}

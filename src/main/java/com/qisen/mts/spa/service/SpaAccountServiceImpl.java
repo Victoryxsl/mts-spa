@@ -1,5 +1,6 @@
 package com.qisen.mts.spa.service;
 
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,21 +25,44 @@ public class SpaAccountServiceImpl implements SpaAccountService{
 	private SpaAccountDao spaAccountDao;
 	
 	
-
+	/**
+	 * 新增spa账号
+	 */
 	@Override
 	public BaseResponse save(SpaRequest<SpaAccount> req) {
 		BaseResponse resp = new BaseResponse();
 		SpaAccount spaAccount = req.getBody();
 		int count = spaAccountDao.check(spaAccount);
-		if (count == 0 ) {
-			spaAccountDao.create(spaAccount);
-		}else {
-			resp.setCode(MsgCode.COMMON_MOBILE_EXIST);
+		if(spaAccount.getId() != null && spaAccount.getId() > 0){
+			if (count == 0 ) {
+				spaAccountDao.update(spaAccount);
+			}else {
+				resp.setCode(MsgCode.COMMON_MOBILE_EXIST);
+			}
+		}else{
+			if (count == 0 ) {
+				spaAccountDao.create(spaAccount);
+			}else {
+				resp.setCode(MsgCode.COMMON_MOBILE_EXIST);
+			}
 		}
 		return resp;
 	}
 
-
+	/**
+	 * 删除spa账号
+	 */
+	@Override
+	public BaseResponse delete(SpaRequest<SpaAccount> req) {
+		BaseResponse resp = new BaseResponse();
+		SpaAccount spaAccount = req.getBody();
+		int count = spaAccountDao.delete(spaAccount);
+		if (count == 0 ) {
+			resp.setCode(MsgCode.COMMON_MOBILE_EXIST);
+		}
+		
+		return resp;
+	}
 
 	@Override
 	public CommObjResponse<SessionSpa> login(SpaRequest<SpaAccount> req) throws Exception {
@@ -49,7 +73,7 @@ public class SpaAccountServiceImpl implements SpaAccountService{
 				if (spaAccount.getStatus().equals("0")) {
 					SessionSpa sessionSpa = spaAccount.toJSON().toJavaObject(SessionSpa.class);
 					String token = UUID.randomUUID().toString();
-					sessionSpa.setAuthToken(token);
+					sessionSpa.setToken(token);
 					String sessionSpaKey = ConfigConsts.SESSION_SPA + token;
 					String spaInfoJsonStr = sessionSpa.toString();
 					if (!memcachedClient.add(sessionSpaKey, ConfigConsts.MAX_SESSION_USER_INTERVAL, spaInfoJsonStr)) {
@@ -65,6 +89,19 @@ public class SpaAccountServiceImpl implements SpaAccountService{
 		}else{
 			resp.setCode(MsgCode.ACCOUNT_NOT_EXIST);
 		}
+		return resp;
+	}
+
+
+	/**
+	 * 查询spa账号
+	 */
+	@Override
+	public CommObjResponse<List<SpaAccount>> list(SpaRequest<SpaAccount> req) {
+		CommObjResponse<List<SpaAccount>> resp = new CommObjResponse<List<SpaAccount>>();
+		SpaAccount spaAccount = req.getBody();
+		List<SpaAccount>  spaList = spaAccountDao.list(spaAccount);
+		resp.setBody(spaList);
 		return resp;
 	}
 	

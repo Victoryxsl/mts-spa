@@ -14,15 +14,15 @@ public class SessionAccount extends BaseEntity {
 	 */
 	private static final long serialVersionUID = 4403566503925103117L;
 
-	protected String authToken;
+	protected String token;
 	protected JSONObject meta = new JSONObject();
 	
-	public String getAuthToken() {
-		return authToken;
+	public String getToken() {
+		return token;
 	}
 
-	public void setAuthToken(String authToken) {
-		this.authToken = authToken;
+	public void setToken(String token) {
+		this.token = token;
 	}
 
 	public JSONObject getMeta() {

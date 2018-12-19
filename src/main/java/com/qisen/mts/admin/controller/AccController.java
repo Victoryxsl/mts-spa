@@ -2,6 +2,7 @@ package com.qisen.mts.admin.controller;
 
 import java.util.List;
 
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,6 +24,7 @@ public class AccController {
 	@Autowired
 	private AccountService accountService;
 
+	@ApiOperation( value = "更新登录状态或创建用户")
 	@RequestMapping("/save")
 	@ResponseBody
 	public BaseResponse save(@RequestBody AdminRequest<Account> req) throws Exception {

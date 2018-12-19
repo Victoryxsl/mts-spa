@@ -91,7 +91,7 @@ public class AdminServiceImpl implements AdminService{
 				if (admin.getAllowFlag().equals("1")) {
 					SessionAdmin sa = admin.toJSON().toJavaObject(SessionAdmin.class);
 					String token = UUID.randomUUID().toString();
-					sa.setAuthToken(token);
+					sa.setToken(token);
 					String sessionAdminKey = ConfigConsts.SESSION_ADMIN + token;
 					String adminInfoJstr = sa.toString();
 					if (!memcachedClient.add(sessionAdminKey, ConfigConsts.MAX_SESSION_USER_INTERVAL, adminInfoJstr)) {

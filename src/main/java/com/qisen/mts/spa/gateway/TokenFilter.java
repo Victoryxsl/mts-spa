@@ -74,7 +74,7 @@ public class TokenFilter extends OncePerRequestFilter {
 			BaseResponse resp = new BaseResponse();
 			if (StringUtils.isNotBlank(token)) {
 				try {
-					String sessionAdminKey = ConfigConsts.SESSION_ADMIN + token;
+					String sessionAdminKey = ConfigConsts.SESSION_SPA + token;
 					String adminInfoJstr = memcachedClient.get(sessionAdminKey);
 					if (StringUtils.isNotBlank(adminInfoJstr)) {
 						memcachedClient.replace(sessionAdminKey, ConfigConsts.MAX_SESSION_USER_INTERVAL, adminInfoJstr);

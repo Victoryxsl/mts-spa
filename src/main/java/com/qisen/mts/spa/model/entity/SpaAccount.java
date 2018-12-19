@@ -16,6 +16,20 @@ public class SpaAccount extends BaseEntity {
 	private static final long serialVersionUID = -5893656151121644946L;
 
 	private Integer id;
+	private Integer eid;
+	public Integer getEid() {
+		return eid;
+	}
+	public void setEid(Integer eid) {
+		this.eid = eid;
+	}
+	public Integer getSid() {
+		return sid;
+	}
+	public void setSid(Integer sid) {
+		this.sid = sid;
+	}
+	private Integer sid;
 	private String name;
 	private String mobile;// 手机号码
 	private Date createDate;// 创建日期

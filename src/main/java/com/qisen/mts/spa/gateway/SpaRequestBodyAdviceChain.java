@@ -57,6 +57,7 @@ public class SpaRequestBodyAdviceChain implements RequestBodyAdvice {
 //				判空
 				if (StringUtils.isNotBlank(spaInfoJsonStr)) {
 //					转换为json对象
+					System.out.println(spaInfoJsonStr);
 					JSONObject sessionSpaJson = JSON.parseObject(spaInfoJsonStr);
 //					转换为java对象
 					SessionSpa sessionSpa = sessionSpaJson.toJavaObject(SessionSpa.class);
